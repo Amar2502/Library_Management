@@ -5,8 +5,8 @@ A full-stack library management system built with the **MERN** stack (MongoDB, E
 ## Features
 
 - **Admin Dashboard**: A comprehensive admin dashboard to manage the library.
-  - **Book Management**: Admins can add, update, or delete books in the library.
-  - **User Management**: Admins can register new students, admins, and assign roles.
+  - **Book Management**: Admins can add books in the library.
+  - **User Management**: Admins can register new students, admins.
   - **Book Issue**: Admins can issue books to students and track due dates.
   - **Book Return**: Admins can mark books as returned.
   - **Fine Management**: Admins can calculate and manage fines for overdue books (currently under development).
