@@ -19,18 +19,6 @@ A full-stack library management system built with the **MERN** stack (MongoDB, E
 
 - **Authorization**: Role-based access control (RBAC) ensures only authorized users (admins) can perform critical actions like issuing books, adding users, etc.
 
-## Technology Stack
-
-This project is built using the following technologies:
-
-- **MERN Stack**:
-  - **MongoDB**: NoSQL database for storing book, user, and transaction data.
-  - **Express**: Web framework for Node.js to handle backend logic and API endpoints.
-  - **React**: Frontend library for building the user interface.
-  - **Node.js**: JavaScript runtime for the backend server.
-
-- **TailwindCSS**: A utility-first CSS framework for styling the frontend.
-
 ## Known Issues & Improvements
 
 1. **Fine Processing**:
@@ -66,3 +54,24 @@ These actions are **only available to admins**:
 3. **Registering Students**: Admins can register students in the library system.
 4. **Returning Books**: Admins can return books on behalf of students.
 5. **Fine Management**: Admins can manage and update fines for overdue books.
+
+## Technology Stack
+
+This project is built using the following technologies:
+
+- **MERN Stack**:
+  - **MongoDB**: NoSQL database for storing book, user, and transaction data.
+  - **Express**: Web framework for Node.js to handle backend logic and API endpoints.
+  - **React**: Frontend library for building the user interface.
+  - **Node.js**: JavaScript runtime for the backend server.
+
+- **TailwindCSS**: A utility-first CSS framework for styling the frontend.
+
+## How to Run the System
+
+### Step 1: Clone the Repository
+
+First, clone the repository to your local machine:
+
+```bash
+git clone <repository_url>
