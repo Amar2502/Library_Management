@@ -76,24 +76,29 @@ First, clone the repository to your local machine:
 ```bash
 git clone https://github.com/Amar2502/Library_Management.git
 cd Library_Management
+```
 
 ### Step 2: Create to terminal and Go to Frontend, Backend Folder
 
 ```bash
 cd Frontend
 cd Backend
+```
 
 ### Step 3: Install Dependencies
 
 ```bash
 npm install
+```
 
-### Step 3: Run Frontend
+### Step 4: Run Frontend
 
 ```bash
 npm run dev
+```
 
-### Step 3: Run Backend
+### Step 5: Run Backend
 
 ```bash
 npm run backend
+```
