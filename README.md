@@ -78,7 +78,7 @@ git clone https://github.com/Amar2502/Library_Management.git
 cd Library_Management
 ```
 
-### Step 2: Create to terminal and Go to Frontend, Backend Folder
+### Step 2: Create two terminals and Go to Frontend, Backend Folder
 
 ```bash
 cd Frontend
