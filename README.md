@@ -34,13 +34,13 @@ This project is built using the following technologies:
 ## Known Issues & Improvements
 
 1. **Fine Processing**:
-   - The fine calculation mechanism is under development. We are working to fix the logic to ensure fines are correctly calculated based on overdue days.
+   - The fine calculation mechanism is under development. I am working to fix the logic to ensure fines are correctly calculated based on overdue days.
 
 2. **Extend Due Date**:
-   - The ability for admins to extend the return date for books is currently being developed.
+   - The ability for students to extend the return date for books is currently being developed.
 
 3. **Authorization Issues**:
-   - There are some minor authorization-related issues that need to be resolved. For example, the system may allow some users to access certain admin-only pages unintentionally. We are working on improving role-based access control (RBAC).
+   - There are some minor authorization-related issues that need to be resolved. For example, the system may allow some users to access certain admin-only pages unintentionally. I am working on improving role-based access control (RBAC).
 
 4. **Additional Features**:
    - Pending features include the ability to search for books by title or author, advanced filtering options, and user notifications for overdue books.
