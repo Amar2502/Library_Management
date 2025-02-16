@@ -69,7 +69,7 @@ const Register_Admin = () => {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className="bg-gray-200 min-h-screen flex flex-col items-center pt-6">
+    <div className="bg-gray-200 min-h-screen flex flex-col items-center pt-5">
       {/* Rest of your JSX remains exactly the same */}
       <div className="w-full max-w-3xl p-6 bg-zinc-100 rounded-lg shadow-lg space-y-6 mt-6 mb-12">
         <div className="p-6 mb-6">
