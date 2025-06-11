@@ -1,5 +1,5 @@
 import Student from "../models/Students.model.js";
-import Book from "../models/Books.model.js";
+import Event from "../models/Event.model.js";
 import hashpass from "../utils/hashpass.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -84,36 +84,36 @@ export const StudentDetail = async (req, res) => {
   });
 };
 
-export const AddBook = async (req, res) => {
-  const { prn, book_id } = req.body;
-  try {
-    const student = await Student.findOne({ prn });
-    if (!student) {
-      return res.status(400).json({ message: "Student Not found" });
-    }
-    const book = await Book.findOne({ book_id });
-    if (!book) {
-      return res.status(400).json({ message: "Book Not found" });
-    }
-    const issuedbook = {
-      name: book.name,
-      book_id: book.book_id,
-    };
-    book.inshelf = book.inshelf - 1;
-    book.issued = book.issued + 1;
+// export const AddBook = async (req, res) => {
+//   const { prn, book_id } = req.body;
+//   try {
+//     const student = await Student.findOne({ prn });
+//     if (!student) {
+//       return res.status(400).json({ message: "Student Not found" });
+//     }
+//     const book = await Book.findOne({ book_id });
+//     if (!book) {
+//       return res.status(400).json({ message: "Book Not found" });
+//     }
+//     const issuedbook = {
+//       name: book.name,
+//       book_id: book.book_id,
+//     };
+//     book.inshelf = book.inshelf - 1;
+//     book.issued = book.issued + 1;
 
-    await book.save();
-    student.issuedBook.push(issuedbook);
+//     await book.save();
+//     student.issuedBook.push(issuedbook);
 
-    await student.save();
-    return res.status(200).json({
-      message: "Book issued successfully",
-    });
-  } catch (err) {
-    console.error("Error while adding book:", err);
-    return res.status(500).json({ message: "Server error" });
-  }
-};
+//     await student.save();
+//     return res.status(200).json({
+//       message: "Book issued successfully",
+//     });
+//   } catch (err) {
+//     console.error("Error while adding book:", err);
+//     return res.status(500).json({ message: "Server error" });
+//   }
+// };
 
 export const checkStudent = async (req, res) => {
   const token = req.cookies.token;
@@ -125,46 +125,46 @@ export const checkStudent = async (req, res) => {
   });
 };
 
-export const ReturnBook = async (req, res) => {
-  try {
-    const { prn, book_id } = req.body;
+// export const ReturnBook = async (req, res) => {
+//   try {
+//     const { prn, book_id } = req.body;
 
-    // Find the student
-    const student = await Student.findOne({ prn });
-    if (!student) {
-      return res.status(400).json({ message: "Student Not found" });
-    }
+//     // Find the student
+//     const student = await Student.findOne({ prn });
+//     if (!student) {
+//       return res.status(400).json({ message: "Student Not found" });
+//     }
 
-    const book = await Book.findOne({ book_id });
-    if (!book) {
-      return res.status(400).json({ message: "Book Not found" });
-    }
+//     const book = await Book.findOne({ book_id });
+//     if (!book) {
+//       return res.status(400).json({ message: "Book Not found" });
+//     }
 
-    book.inshelf = book.inshelf + 1;
-    book.issued = book.issued - 1;
+//     book.inshelf = book.inshelf + 1;
+//     book.issued = book.issued - 1;
 
-    await book.save();
+//     await book.save();
 
-    if (!Array.isArray(student.issuedBook)) {
-      return res.status(400).json({ message: "Issued books data is invalid" });
-    }
+//     if (!Array.isArray(student.issuedBook)) {
+//       return res.status(400).json({ message: "Issued books data is invalid" });
+//     }
 
-    const index = student.issuedBook.findIndex(
-      (book) => book.book_id === book_id
-    );
+//     const index = student.issuedBook.findIndex(
+//       (book) => book.book_id === book_id
+//     );
 
-    if (index === -1) {
-      return res.status(404).json({ message: "Book not found in issued list" });
-    }
+//     if (index === -1) {
+//       return res.status(404).json({ message: "Book not found in issued list" });
+//     }
 
-    const removed = student.issuedBook.splice(index, 1);
+//     const removed = student.issuedBook.splice(index, 1);
 
-    await student.save();
+//     await student.save();
 
-    return res.status(200).json({ message: "Book returned successfully" });
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ message: "An error occurred", error: error.message });
-  }
-};
+//     return res.status(200).json({ message: "Book returned successfully" });
+//   } catch (error) {
+//     return res
+//       .status(500)
+//       .json({ message: "An error occurred", error: error.message });
+//   }
+// };

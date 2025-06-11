@@ -1,7 +1,7 @@
 import express from "express"
 import AdminRoutes from "./routes/AdminRoutes.js"
 import StudentRoutes from "./routes/StudentRoutes.js"
-import BookRoutes from "./routes/BookRoutes.js"
+import EventRoutes from "./routes/EventRoutes.js"
 import cors from "cors"
 import cookieParser from 'cookie-parser'
 
@@ -19,6 +19,6 @@ app.use(cookieParser());
 
 app.use("/admin", AdminRoutes)
 app.use("/student", StudentRoutes)
-app.use("/book", BookRoutes)
+app.use("/book", EventRoutes)
 
 export default app;

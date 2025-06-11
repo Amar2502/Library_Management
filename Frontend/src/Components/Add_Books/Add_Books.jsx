@@ -2,34 +2,28 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Add_Book = () => {
+const Add_Event = () => {
   const navigate = useNavigate();
 
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
-    book_id: "",
-    inshelf: 0, // Default to 0 (not in shelf)
-    issued: 0, // Default to 0 (not issued)
+    tag: "Technical",
+    description: "",
+    coordinatorName: "",
+    coordinatorPhone: "",
+    mode: "Offline",
+    venue: "",
+    dateTime: "",
   });
 
   useEffect(() => {
     axios
       .get("http://localhost:3000/admin/checkauth", { withCredentials: true })
-      .then((res) => {
-        setIsAdmin(true); // User is an admin
-      })
-      .catch((err) => {
-        console.error(
-          "Authorization error:",
-          err.response?.data || err.message
-        );
-        setIsAdmin(false); // User is not authorized
-      })
-      .finally(() => {
-        setLoading(false); // Stop loading after check
-      });
+      .then(() => setIsAdmin(true))
+      .catch(() => setIsAdmin(false))
+      .finally(() => setLoading(false));
   }, []);
 
   if (loading) {
@@ -41,18 +35,17 @@ const Add_Book = () => {
   }
 
   if (!isAdmin) {
-    // Show an alert and redirect unauthorized users
     setTimeout(() => {
       navigate("/");
     }, 0);
-    return null; // Prevent rendering of dashboard content
+    return null;
   }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: name === "inshelf" || name === "issued" ? parseInt(value) : value,
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
     }));
   };
 
@@ -60,90 +53,157 @@ const Add_Book = () => {
     e.preventDefault();
 
     axios
-      .post("http://localhost:3000/book/add-book", formData, {
+      .post("http://localhost:3000/book/add-event", formData, {
         withCredentials: true,
       })
-      .then((res) => {
-        alert("Book Added Successfully");
+      .then(() => {
+        alert("Event added successfully!");
         navigate("/admin/dashboard");
       })
-      .catch((err) => {
-        alert("Try Again Later");
+      .catch(() => {
+        alert("Try again later");
       });
   };
 
   return (
-    <div className="h-screen w-screen">
-      <div className="max-w-md m-auto mt-12 bg-gray-100 p-6 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-semibold mb-4 text-center">
-          Add a New Book
+    <div className="h-screen w-screen overflow-y-auto">
+      <div className="max-w-2xl m-auto mt-12 bg-gray-100 p-6 rounded-lg shadow-lg">
+        <h2 className="text-2xl font-semibold mb-6 text-center text-indigo-600">
+          Add New Event
         </h2>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Event Name */}
+          <div>
             <label className="block text-sm font-medium text-gray-700">
-              Book Name
+              Event Name
             </label>
             <input
               type="text"
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
               required
+              className="mt-1 w-full border px-4 py-2 rounded-md"
             />
           </div>
 
-          <div className="mb-4">
+          {/* Tag */}
+          <div>
             <label className="block text-sm font-medium text-gray-700">
-              Book ID
+              Event Tag
+            </label>
+            <select
+              name="tag"
+              value={formData.tag}
+              onChange={handleChange}
+              className="mt-1 w-full border px-4 py-2 rounded-md"
+              required
+            >
+              <option value="Technical">Technical</option>
+              <option value="Cultural">Cultural</option>
+              <option value="Sports">Sports</option>
+              <option value="Literature">Literature</option>
+            </select>
+          </div>
+
+          {/* Description */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Description
+            </label>
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              required
+              className="mt-1 w-full border px-4 py-2 rounded-md"
+            />
+          </div>
+
+          {/* Coordinator Name */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Coordinator Name
             </label>
             <input
               type="text"
-              name="book_id"
-              value={formData.book_id}
+              name="coordinatorName"
+              value={formData.coordinatorName}
               onChange={handleChange}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
               required
+              className="mt-1 w-full border px-4 py-2 rounded-md"
             />
           </div>
 
-          <div className="mb-4">
+          {/* Coordinator Phone */}
+          <div>
             <label className="block text-sm font-medium text-gray-700">
-              Number of books inshelf
+              Coordinator Phone
             </label>
             <input
-              type="number"
-              name="inshelf"
-              value={formData.inshelf}
+              type="text"
+              name="coordinatorPhone"
+              value={formData.coordinatorPhone}
               onChange={handleChange}
-              min="0"
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              maxLength="10"
               required
+              className="mt-1 w-full border px-4 py-2 rounded-md"
             />
           </div>
 
-          <div className="mb-4">
+          {/* Mode */}
+          <div>
             <label className="block text-sm font-medium text-gray-700">
-              Number of books issued
+              Mode
+            </label>
+            <select
+              name="mode"
+              value={formData.mode}
+              onChange={handleChange}
+              className="mt-1 w-full border px-4 py-2 rounded-md"
+              required
+            >
+              <option value="Online">Online</option>
+              <option value="Offline">Offline</option>
+            </select>
+          </div>
+
+          {/* Venue */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Venue (required if Offline)
             </label>
             <input
-              type="number"
-              name="issued"
-              value={formData.issued}
+              type="text"
+              name="venue"
+              value={formData.venue}
               onChange={handleChange}
-              min="0"
-              max="0"
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              required
+              className="mt-1 w-full border px-4 py-2 rounded-md"
             />
           </div>
 
+          {/* Date & Time */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Date and Time
+            </label>
+            <input
+              type="datetime-local"
+              name="dateTime"
+              value={formData.dateTime}
+              onChange={handleChange}
+              required
+              className="mt-1 w-full border px-4 py-2 rounded-md"
+            />
+          </div>
+
+          {/* Submit */}
           <div className="flex justify-center">
             <button
               type="submit"
-              className="px-6 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition"
             >
-              Add Book
+              Add Event
             </button>
           </div>
         </form>
@@ -152,4 +212,4 @@ const Add_Book = () => {
   );
 };
 
-export default Add_Book;
+export default Add_Event;

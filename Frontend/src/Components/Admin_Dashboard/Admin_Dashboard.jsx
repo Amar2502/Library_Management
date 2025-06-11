@@ -47,14 +47,7 @@ const Admin_Dashboard = () => {
           {/* Browse Books */}
           <div className="bg-blue-500 text-white p-4 rounded-lg text-center hover:bg-blue-600">
             <Link to="/user/browse-books" className="block text-lg font-semibold">
-              Browse Books
-            </Link>
-          </div>
-
-          {/* Register a Student */}
-          <div className="bg-green-500 text-white p-4 rounded-lg text-center hover:bg-green-600">
-            <Link to="/admin/register-student" className="block text-lg font-semibold">
-              Register Student
+              Browse Events
             </Link>
           </div>
 
@@ -68,21 +61,7 @@ const Admin_Dashboard = () => {
           {/* Add New Books */}
           <div className="bg-indigo-500 text-white p-4 rounded-lg text-center hover:bg-indigo-600">
             <Link to="/admin/add-book" className="block text-lg font-semibold">
-              Add New Books
-            </Link>
-          </div>
-
-          {/* Issue a Book */}
-          <div className="bg-purple-500 text-white p-4 rounded-lg text-center hover:bg-purple-600">
-            <Link to="/admin/issue-book" className="block text-lg font-semibold">
-              Issue a Book
-            </Link>
-          </div>
-
-          {/* Get Student Details */}
-          <div className="bg-teal-500 text-white p-4 rounded-lg text-center hover:bg-teal-600">
-            <Link to="/admin/student-detail" className="block text-lg font-semibold">
-              Get Student Details
+              Add New Event
             </Link>
           </div>
         </div>

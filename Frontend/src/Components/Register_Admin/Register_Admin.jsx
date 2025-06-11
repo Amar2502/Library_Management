@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 const Register_Admin = () => {
   const navigate = useNavigate();
 
-  // Move ALL state declarations to the top
-  const [isadmin, setIsAdmin] = useState(false);
-  const [loading, setLoading] = useState(true);
+  // // Move ALL state declarations to the top
+  // const [isadmin, setIsAdmin] = useState(false);
+  // const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -16,25 +16,25 @@ const Register_Admin = () => {
     role: "admin",
   });
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/admin/checkauth", { withCredentials: true })
-      .then((res) => {
-        setIsAdmin(true);
-      })
-      .catch((err) => {
-        setIsAdmin(false);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:3000/admin/checkauth", { withCredentials: true })
+  //     .then((res) => {
+  //       setIsAdmin(true);
+  //     })
+  //     .catch((err) => {
+  //       setIsAdmin(false);
+  //     })
+  //     .finally(() => {
+  //       setLoading(false);
+  //     });
+  // }, []);
 
-  useEffect(() => {
-    if (!loading && !isadmin) {
-      navigate("/");
-    }
-  }, [loading, isadmin, navigate]);
+  // useEffect(() => {
+  //   if (!loading && !isadmin) {
+  //     navigate("/");
+  //   }
+  // }, [loading, isadmin, navigate]);
 
   // Handle form input changes
   const handleChange = (e) => {
@@ -66,7 +66,7 @@ const Register_Admin = () => {
       });
   };
 
-  if (loading) return <div>Loading...</div>;
+  // if (loading) return <div>Loading...</div>;
 
   return (
     <div className="bg-gray-200 min-h-screen flex flex-col items-center pt-5">

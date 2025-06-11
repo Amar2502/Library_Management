@@ -4,10 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 const Register_Student = () => {
   const navigate = useNavigate();
-
-  // Move ALL state declarations to the top
-  const [isadmin, setIsAdmin] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
     prn: "",
@@ -16,26 +12,6 @@ const Register_Student = () => {
     password: "",
     year: "",
   });
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/admin/checkauth", { withCredentials: true })
-      .then((res) => {
-        setIsAdmin(true);
-      })
-      .catch((err) => {
-        setIsAdmin(false);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
-
-  useEffect(() => {
-    if (!loading && !isadmin) {
-      navigate("/");
-    }
-  }, [loading, isadmin, navigate]);
 
   // Handle form input changes
   const handleChange = (e) => {
@@ -67,8 +43,6 @@ const Register_Student = () => {
         alert("Error Occured, Check Credentials or Try Again Later");
       });
   };
-
-  if (loading) return <div>Loading...</div>;
 
   return (
     <div className="bg-gray-200 min-h-screen flex flex-col items-center pt-6">
